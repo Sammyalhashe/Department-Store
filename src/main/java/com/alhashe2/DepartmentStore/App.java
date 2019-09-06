@@ -3,12 +3,25 @@
  */
 package com.alhashe2.DepartmentStore;
 
+import com.alhashe2.Threading.DAO;
+import com.alhashe2.Threading.Fruit;
+
+
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
+
+    public void threadingTest() throws Exception {
+        DAO<Fruit> dao = new DAO<>("sammy_fruits", "fruit_id");
+        Fruit myFruit = dao.read("1");
+        System.out.println("Here is the product: " + myFruit);
+		dao.close();
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        try {
+            new App().threadingTest();
+        } catch (Exception e) {
+            System.out.println("Failure message: " + e.getMessage());
+        }
     }
 }
